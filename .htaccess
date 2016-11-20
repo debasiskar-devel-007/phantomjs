@@ -1,0 +1,23 @@
+RewriteEngine on
+RewriteBase /
+
+# Don't rewrite files or directories
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Rewrite everything else to index.html to allow html5 state links
+<IfModule mod_expires.c>
+   # Enable expirations.
+   ExpiresActive On
+
+   # Cache all files for 2 weeks after access (A).
+   ExpiresDefault A1209600
+
+  <FilesMatch (\.js|\.html)$>
+     ExpiresActive Off
+  </FilesMatch>
+ </IfModule>
+
+
+
